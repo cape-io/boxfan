@@ -44,20 +44,22 @@ hasFields = (values, required) ->
     return false
 
 filter = (values, filter_info) ->
+  filter_types = []
   if not (filter_info.must or filter_info.must_not or filter_info.should)
     filter_info = {must: filter_info}
-  filter_types = _.keys filter_info
+    filter_types = ['must']
+  else
+    filter_types = _.keys filter_info
+
   if _.contains('must', filter_types) and _.isObject(filter_info.must) and not matchAll(values, filter_info.must)
     return false
-  #console.log 'match filter_must'
+
   if _.contains('must_not', filter_types) and _.isObject(filter_info.must_not) and matchAny(values, filter_info.must_not)
     return false
-  #console.log 'match must_not'
+
   if _.contains('should', filter_types) and _.isObject(filter_info.should) and not matchAny(values, filter_info.should)
-    #console.log filter_info.should
-    #console.log _.values(filter_info.should)
     return false
-  #console.log 'match should'
+
   return true
 
 

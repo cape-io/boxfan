@@ -26,7 +26,7 @@ describe('boxfan', function() {
     res_arr.should.have.deep.property('[0].id', 3);
     return res_arr.should.have.deep.property('[1].id', 6);
   });
-  return it('Return entries that have a value in the filter.should array.', function() {
+  it('Return entries that have a value in the filter.should array.', function() {
     var filter, res_arr;
     filter = {
       should: {
@@ -38,5 +38,19 @@ describe('boxfan', function() {
     res_arr.should.have.deep.property('[0].id', 1);
     res_arr.should.have.deep.property('[1].id', 3);
     return res_arr.should.have.deep.property('[2].id', 6);
+  });
+  return it('Return entries that do not have properties defined in filter.must_not.', function() {
+    var filter, res_arr;
+    filter = {
+      must_not: {
+        name: 'kai',
+        color: 'green',
+        id: 5
+      }
+    };
+    res_arr = boxfan(data.simple_array, filter);
+    res_arr.length.should.equal(2);
+    res_arr.should.have.deep.property('[0].id', 3);
+    return res_arr.should.have.deep.property('[1].id', 4);
   });
 });

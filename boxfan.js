@@ -67,12 +67,15 @@ hasFields = function(values, required) {
 
 filter = function(values, filter_info) {
   var filter_types;
+  filter_types = [];
   if (!(filter_info.must || filter_info.must_not || filter_info.should)) {
     filter_info = {
       must: filter_info
     };
+    filter_types = ['must'];
+  } else {
+    filter_types = _.keys(filter_info);
   }
-  filter_types = _.keys(filter_info);
   if (_.contains('must', filter_types) && _.isObject(filter_info.must) && !matchAll(values, filter_info.must)) {
     return false;
   }
