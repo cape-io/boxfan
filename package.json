@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/sundaysenergy/boxfan.git"
+    "url": "git://github.com/cape-io/boxfan.git"
   },
   "keywords": [
     "json",
@@ -18,12 +18,13 @@
   "author": "Kai Curry <kai@cape.io> (http://www.cape.io/)",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/sundaysenergy/boxfan/issues"
+    "url": "https://github.com/cape-io/boxfan/issues"
   },
-  "homepage": "https://github.com/sundaysenergy/boxfan",
+  "homepage": "https://github.com/cape-io/boxfan",
   "dependencies": {
     "lodash": "^2.4.1",
-    "dot-object": "^0.3.0"
+    "dot-object": "^0.3.0",
+    "JSONPath": "^0.10.0"
   },
   "devDependencies": {
     "mocha": "^1.20.1",
