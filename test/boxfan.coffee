@@ -36,3 +36,9 @@ describe 'boxfan', () ->
     res_arr.length.should.equal(2)
     res_arr.should.have.deep.property('[0].id', 3)
     res_arr.should.have.deep.property('[1].id', 4)
+
+  it 'Returns nothing if trying to search against a field no item has.', () ->
+    filter =
+      must:
+        cow: 'bessy'
+    res = boxfan(data.simple_array, filter).should.eql([])

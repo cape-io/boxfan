@@ -44,6 +44,9 @@ hasFields = (values, required) ->
     return false
 
 filter = (values, filter_info) ->
+  # Filter out anything that is not an object.
+  unless _.isObject values
+    return false
   filter_types = []
   if not (filter_info.must or filter_info.must_not or filter_info.should)
     filter_info = {must: filter_info}
@@ -69,6 +72,9 @@ module.exports = (values, filter_info) ->
   if _.isArray values
     return _.filter values, (item) =>
       return filter item, filter_info
-    #console.log items
-  else
+  # Otherwise return a boolean value.
+  else if _.isObject values
     return filter values, filter_info
+  # Filter out anything that is not an object or array of objects.
+  else
+    return false

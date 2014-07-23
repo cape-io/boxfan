@@ -39,7 +39,7 @@ describe('boxfan', function() {
     res_arr.should.have.deep.property('[1].id', 3);
     return res_arr.should.have.deep.property('[2].id', 6);
   });
-  return it('Return entries that do not have properties defined in filter.must_not.', function() {
+  it('Return entries that do not have properties defined in filter.must_not.', function() {
     var filter, res_arr;
     filter = {
       must_not: {
@@ -52,5 +52,14 @@ describe('boxfan', function() {
     res_arr.length.should.equal(2);
     res_arr.should.have.deep.property('[0].id', 3);
     return res_arr.should.have.deep.property('[1].id', 4);
+  });
+  return it('Returns nothing if trying to search against a field no item has.', function() {
+    var filter, res;
+    filter = {
+      must: {
+        cow: 'bessy'
+      }
+    };
+    return res = boxfan(data.simple_array, filter).should.eql([]);
   });
 });

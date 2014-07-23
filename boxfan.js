@@ -67,6 +67,9 @@ hasFields = function(values, required) {
 
 filter = function(values, filter_info) {
   var filter_types;
+  if (!_.isObject(values)) {
+    return false;
+  }
   filter_types = [];
   if (!(filter_info.must || filter_info.must_not || filter_info.should)) {
     filter_info = {
@@ -94,7 +97,9 @@ module.exports = function(values, filter_info) {
     return _.filter(values, function(item) {
       return filter(item, filter_info);
     });
-  } else {
+  } else if (_.isObject(values)) {
     return filter(values, filter_info);
+  } else {
+    return false;
   }
 };
